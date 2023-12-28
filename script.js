@@ -64,3 +64,7 @@ function clickSearchButton(e) {
 };
 
 
+// localStorage.setItem(btnId, noteValue);
+//             var note = document.createElement('p');
+//             note.textContent = localStorage.getItem('note');
+//             timeBlock[i].appendChild(note);
