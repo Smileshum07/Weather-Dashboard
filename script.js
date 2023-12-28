@@ -14,6 +14,12 @@ function clickSearchButton(e) {
     var name = input.value.trim();
     var cityName = document.getElementById('city');
     cityName.textContent = name.toUpperCase();
+    // local storage
+    var history = document.getElementById('history');
+    localStorage.setItem(searchButton, name);
+    var localCityName = document.createElement('button');
+    localCityName.textContent = localStorage.getItem(`${localCityName}`);
+    history.appendChild(localCityName);
     
     // get the lon, lat 
     queryUrlGet = `http://api.openweathermap.org/geo/1.0/direct?q=${name}&limit=5&appid=${APIKey}`
@@ -64,7 +70,3 @@ function clickSearchButton(e) {
 };
 
 
-// localStorage.setItem(btnId, noteValue);
-//             var note = document.createElement('p');
-//             note.textContent = localStorage.getItem('note');
-//             timeBlock[i].appendChild(note);

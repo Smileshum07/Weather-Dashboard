@@ -1,0 +1,8 @@
+.list-group button {
+    height: 35px;
+    background: rgb(107, 106, 106);
+    color: black;
+    border: none;
+    border-radius: 5px;
+    margin-left: 5px;
+}
