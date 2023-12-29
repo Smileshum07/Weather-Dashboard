@@ -41,65 +41,21 @@
       </aside>
 
       <div class="col-lg-7 col-12 pb-3">
-        <section id="today" class="mt-3 m-3" role="region" aria-live="polite">
+        <section id="today" class="mt-3 m-3 container-fluid" role="region" aria-live="polite">
           <div id="main-card m-5">
             <div class="d-flex flex-row align-middle">
               <p id="city" class="fs-3 fw-semibold"></p>
               <div id="today-date" class="fs-3 fw-semibold ms-5"></div>
-              <img id="today-icon" class="align-self-start ms-5 mt-0 pt-0" style="width: 50px;">
+              <img id="today-icon" class="align-self-start ms-5 mt-0 pt-0" style="width: 55px;">
             </div>
-            <div id="tempr-today" class="mb-1"></div>
-            <div id="wind-today" class="mb-1"></div>
-            <div id="humid-today" class="mb-1"></div>
+            <div id="tempr-today" class="mb-2"></div>
+            <div id="wind-today" class="mb-2"></div>
+            <div id="humid-today" class="mb-2"></div>
           </div>
         </section>
-        <section id="forecast" class="col mt-3" role="region" aria-live="polite">
-          <h3></h3>
-          <div class="cards col-2">
-            <div class="row">
-              <p class="date"></p>
-              <div class="icon"></div>
-            </div>
-            <div class="tempr"></div>
-            <div class="wind"></div>
-            <div class="humid"></div>
-          </div>
-          <div class="cards col-2">
-            <div class="row">
-              <p class="date"></p>
-              <div class="icon"></div>
-            </div>
-            <div class="tempr"></div>
-            <div class="wind"></div>
-            <div class="humid"></div>
-          </div>
-          <div class="cards col-2">
-            <div class="row">
-              <p class="date"></p>
-              <div class="icon"></div>
-            </div>
-            <div class="tempr"></div>
-            <div class="wind"></div>
-            <div class="humid"></div>
-          </div>
-          <div class="cards col-2">
-            <div class="row">
-              <p class="date"></p>
-              <div class="icon"></div>
-            </div>
-            <div class="tempr"></div>
-            <div class="wind"></div>
-            <div class="humid"></div>
-          </div>
-          <div class="cards col-2">
-            <div class="row">
-              <p class="date"></p>
-              <div class="icon"></div>
-            </div>
-            <div class="tempr"></div>
-            <div class="wind"></div>
-            <div class="humid"></div>
-          </div>
+        <section id="forecast" class="col ms-3 mt-5 container-fluid" role="region" aria-live="polite">
+          <h3 id="forecastTitle" class="fs-4 fw-semibold mb-3"></h3>
+          <div id="forecast-cars" class="d-flex flex-md-row flex-column gap-2 "></div>
         </section>
       </div>
     </div>
