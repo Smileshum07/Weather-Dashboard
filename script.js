@@ -68,8 +68,11 @@ function clickSearchButton(e) {
                     var forecastTitle = document.getElementById('forecastTitle');
                     // console.log(forecastTitle)
                     forecastTitle.textContent = '5-Day Forecast';
+                    var forecastCars = document.getElementById('forecast-cars');
+                    forecastCars.innerHTML = ''; // clear the existing content
+
                     for (var i = 6; i < weatherArrey.length; i += 7) {
-                        var forecastCars = document.getElementById('forecast-cars');
+                        
                         var date = dayjs(`${weatherArrey[i].dt_txt}`).format('DD.MM.YYYY');
                         var srcForecast = `${weatherArrey[i].weather[0].icon}.png`;
                         var cardForecast = `
@@ -86,6 +89,7 @@ function clickSearchButton(e) {
                         var cardElement = document.createElement('div');
                         cardElement.innerHTML = cardForecast;
                         forecastCars.appendChild(cardElement);
+
                     };
                 });
    
@@ -94,9 +98,7 @@ function clickSearchButton(e) {
     };
     getData();
 }
+searchButton.addEventListener('click', clickSearchButton);
 
-// window.addEventListener('load', function () {
-//     if(localStorage.getItem(''))
-// })
 
 
