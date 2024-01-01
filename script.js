@@ -35,7 +35,7 @@ function clickSearchButton(e) {
     // get the lon, lat 
     
     function getData() {
-        queryUrlGet = `http://api.openweathermap.org/geo/1.0/direct?q=${name}&limit=5&appid=${APIKey}`;
+        queryUrlGet = `https://api.openweathermap.org/geo/1.0/direct?q=${name}&limit=5&appid=${APIKey}`;
         fetch(queryUrlGet).then(function (response) {
             return response.json();
         }).then(function (data) {
