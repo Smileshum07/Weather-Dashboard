@@ -4,8 +4,6 @@ var input = document.getElementById('search-input');
 var queryUrlGet = '';
 var today = document.getElementById('today');
 
-searchButton.addEventListener('click', clickSearchButton);
-
 
 function clickSearchButton(e) {
     e.preventDefault();
@@ -13,13 +11,26 @@ function clickSearchButton(e) {
     var name = input.value.trim();
     var cityName = document.getElementById('city');
     cityName.textContent = name.toUpperCase();
-    // local storage
+
+    // Store the city name 
+    localStorage.setItem('cityName', name.toUpperCase());
+
+    // Create a button element to display the city name stored in history
     var history = document.getElementById('history');
-    localStorage.setItem(searchButton, name);
     var localCityName = document.createElement('button');
-    localCityName.textContent = localStorage.getItem(`${localCityName}`);
+    localCityName.textContent = localStorage.getItem('cityName');
     localCityName.setAttribute('class', 'show')
     history.appendChild(localCityName);
+    
+
+    var historyCityName = document.getElementsByClassName('show');
+   // console.log(historyCityName[0].innerHTML)
+
+    for (var button of historyCityName) {
+       // name = button.innerHTML;
+        button.addEventListener("click", getData);
+       
+    };
     
     // get the lon, lat 
     
@@ -41,10 +52,19 @@ function clickSearchButton(e) {
                 }).then(function (data) {
                     //console.log(data)
 
-                    // get the weather forecast array 
+                    // get the weather forecast data 
                     var weatherArrey = data.list;
                     console.log(weatherArrey);
+                    // store the weather forecast data
+                    var storedForecast = {
+                        city: name,
+                        forecast: weatherArrey
+                    }
+                    localStorage.setItem('storedForecast', JSON.stringify(storedForecast));
+                    cityName.textContent = '';
                     
+                    cityName.textContent = name.toUpperCase();
+
                     // add the weather icon to main card
                     var todayIcon = document.getElementById('today-icon');
                     var src = `${weatherArrey[0].weather[0].icon}.png`;
@@ -70,7 +90,7 @@ function clickSearchButton(e) {
                     forecastTitle.textContent = '5-Day Forecast';
                     var forecastCars = document.getElementById('forecast-cars');
                     forecastCars.innerHTML = ''; // clear the existing content
-
+                    
                     for (var i = 6; i < weatherArrey.length; i += 7) {
                         
                         var date = dayjs(`${weatherArrey[i].dt_txt}`).format('DD.MM.YYYY');
@@ -97,8 +117,31 @@ function clickSearchButton(e) {
         })
     };
     getData();
+    
+   
 }
 searchButton.addEventListener('click', clickSearchButton);
+
+// Function to retrieve saved city names from local storage and display them as buttons
+function displaySearchHistory() {
+  var history = document.getElementById('history');
+  var savedCities = JSON.parse(localStorage.getItem('searchHistory')) || [];
+
+  // Clear existing buttons
+  history.innerHTML = '';
+
+  // Create buttons for each saved city
+  savedCities.forEach(function(city) {
+    var button = document.createElement('button');
+    button.textContent = city;
+    button.classList.add('show');
+    history.appendChild(button);
+  });
+};
+
+
+
+
 
 
 
