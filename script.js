@@ -20,26 +20,29 @@ function clickSearchButton(e) {
     var localCityName = document.createElement('button');
     localCityName.textContent = localStorage.getItem('cityName');
     localCityName.setAttribute('class', 'show')
-    history.appendChild(localCityName);
-    
 
-    var historyCityName = document.getElementsByClassName('show');
-   // console.log(historyCityName[0].innerHTML)
+    // Check if the city name already exists in the search history
+    var historyCityNames = document.getElementsByClassName('show');
+    var cityExists = false;
+        for (var button of historyCityNames) {
+            if (button.textContent === localCityName.textContent) {
+            cityExists = true;
+            break;
+            }
+        }
 
-    for (var button of historyCityName) {
-       // name = button.innerHTML;
-        button.addEventListener("click", getData);
-       
-    };
-    
-    // get the lon, lat 
+        if (!cityExists) {
+            history.appendChild(localCityName);
+            localCityName.addEventListener("click", getData);
+        }
+    // Get the forecast Data (lat, lon, weather)
     
     function getData() {
         queryUrlGet = `https://api.openweathermap.org/geo/1.0/direct?q=${name}&limit=5&appid=${APIKey}`;
         fetch(queryUrlGet).then(function (response) {
             return response.json();
         }).then(function (data) {
-            // console.log(data)
+            console.log(data)
             var lat = data[0].lat;
             console.log(lat)
             var lon = data[0].lon;
@@ -50,7 +53,7 @@ function clickSearchButton(e) {
                 .then(function (response) {
                     return response.json();
                 }).then(function (data) {
-                    //console.log(data)
+                    console.log(data)
 
                     // get the weather forecast data 
                     var weatherArrey = data.list;
@@ -111,37 +114,18 @@ function clickSearchButton(e) {
                         forecastCars.appendChild(cardElement);
 
                     };
-                });
-   
-
-        })
+                })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+           })
     };
     getData();
     
    
 }
+
 searchButton.addEventListener('click', clickSearchButton);
-
-// Function to retrieve saved city names from local storage and display them as buttons
-function displaySearchHistory() {
-  var history = document.getElementById('history');
-  var savedCities = JSON.parse(localStorage.getItem('searchHistory')) || [];
-
-  // Clear existing buttons
-  history.innerHTML = '';
-
-  // Create buttons for each saved city
-  savedCities.forEach(function(city) {
-    var button = document.createElement('button');
-    button.textContent = city;
-    button.classList.add('show');
-    history.appendChild(button);
-  });
-};
-
-
-
-
 
 
 
